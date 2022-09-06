@@ -20,11 +20,12 @@ export const queries =
         
     },
     getCategory: async (root, { name }) => {
-        let db, category
+        let db, filtered, products
         try {
             db = await connectDB()
-            category = await db.collection(DB_COLLECTION2).findOne({name: name})
-            return category
+            products = await db.collection(DB_COLLECTION1).find({}).toArray()
+            if (name === 'all') return products
+            return filtered = await products.filter(each => each.category === name)
         } catch (error) {
             errorHandler(error)
         }
@@ -40,11 +41,21 @@ export const queries =
         }
         
     },
-    getProduct: async (root, { id }) => {
+    getProducts: async () => {
+        let db, products
+        try {
+            db = await connectDB()
+            products = await db.collection(DB_COLLECTION1).find({}).toArray()
+            return products
+        } catch (error) {
+            errorHandler(error)
+        }
+    },
+    getProduct: async (root, { setId }) => {
         let db, product
         try {
             db = await connectDB()
-            product = await db.collection(DB_COLLECTION1).findOne({_id: ObjectId(id)})
+            product = await db.collection(DB_COLLECTION1).findOne({setId: setId})
             return product
         } catch (error) {
             errorHandler(error)

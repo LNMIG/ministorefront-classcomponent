@@ -45,7 +45,8 @@ type Currency {
 
 type Query {
     getCategories: [Categories],
-    getCategory(name: String!): Categories,
+    getCategory(name: String!): [Product],
+    getProducts: [Product],
     getProduct(setId: String!): Product,
     getCurrencies: [Currency]
 }
