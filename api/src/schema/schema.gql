@@ -34,20 +34,20 @@ type Category {
     products: [Product]!
 }
 
+type Categories {
+    name: String!,
+}
+
 type Currency {
     label: String!,
     symbol: String!
 }
 
 type Query {
-    getCategories: [Category],
-    getCategory(input: CategoryInput): Category,
+    getCategories: [Categories],
+    getCategory(name: String!): Categories,
     getProduct(setId: String!): Product,
     getCurrencies: [Currency]
-}
-
-input CategoryInput {
-    title: String!
 }
 
 type Mutation {
