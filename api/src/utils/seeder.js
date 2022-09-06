@@ -2,20 +2,25 @@
 import dotenv from 'dotenv'
 import mongoose from 'mongoose'
 import {connectMongoose} from '../mongomodel/connection.js'
-import modelToStore from '../mongomodel/model.js'
+import productModelToStore from '../mongomodel/product.js'
+import categoryModelToStore from '../mongomodel/category.js'
 
 dotenv.config()
-const { DB_USER, DB_HOST, DB_PORT, DB_NAME,DB_COLLECTION } = process.env
+const { DB_USER, DB_HOST, DB_PORT, DB_NAME, DB_COLLECTION1, DB_COLLECTION2 } = process.env
 const mongoURL = `${DB_USER}://${DB_HOST}:${DB_PORT}/${DB_NAME}`
 
 
 mongoose.connect(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.createConnection(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
 
-//Clean Collection and load again
-db.collection(DB_COLLECTION).drop()
+//Create Collections
+//db.createCollection(DB_COLLECTION1, (err, result) => {})
+//db.createCollection(DB_COLLECTION2, (err, result) => {})
+//Clean Collections
+db.collection(DB_COLLECTION1).drop()
+db.collection(DB_COLLECTION2).drop()
 
-const data = [
+const productData = [
     {
         setId: 'huarache-x-stussy-le',
         name: 'Nike Air Huarache Le',
@@ -686,10 +691,19 @@ const data = [
     }
 ]
 
+const categoryData = [
+    {name: 'all'},
+    {name: 'clothes'},
+    {name: 'tech'}
+]
+
 const seeder = async () => {
     connectMongoose()
-    for (let i=0; i< data.length; i++) {
-        await modelToStore.create(data[i])
+    for (let i=0; i< productData.length; i++) {
+        await productModelToStore.create(productData[i])
+    }
+    for (let i=0; i< categoryData.length; i++) {
+        await categoryModelToStore.create(categoryData[i])
     }
 }
 
