@@ -4,13 +4,13 @@ const getProductById = (productId) => {
     const String = { productId: productId }
 
     return function (dispatch) {
-        return fetch('http://localhost:4000/graphql', {
+        return fetch('http://localhost:4000/api/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query: `
           query ($productId: String!) {
-            product(id: $productId) {
-                id
+            getProduct(setId: $productId) {
+                setId
                 name
                 inStock
                 gallery
@@ -41,8 +41,8 @@ const getProductById = (productId) => {
         })
         .then(res => res.json())
         .then(json => {
-                       sessionStorage.setItem('productDetails', JSON.stringify(json.data.product))
-                       dispatch({type: GET_PRODUCT_BY_ID, payload: json.data.product})
+                       sessionStorage.setItem('productDetails', JSON.stringify(json.data.getProduct))
+                       dispatch({type: GET_PRODUCT_BY_ID, payload: json.data.getProduct})
                       })
     } 
 }

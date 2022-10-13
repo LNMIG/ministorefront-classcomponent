@@ -2,51 +2,50 @@ import { GET_PRODUCTS_BY_CATEGORY } from '../constants'
 
 const getProductsByCategory = (categoryInput = "all") => {
 
-    const CategoryInput = { input: { title: categoryInput}}
+    //const CategoryInput = { input: { title: categoryInput}}
+    const String = { name: categoryInput }
 
     return function (dispatch) {
-        return fetch('http://localhost:4000/graphql', {
+        return fetch('http://localhost:4000/api/graphql', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
             query: `
-                query ($input: CategoryInput){
-                    category (input: $input){
+                query ($name: String!){
+                    getCategory (name: $name){
+                        setId
                         name
-                        products {
+                        inStock
+                        gallery
+                        description
+                        category
+                        attributes {
                           id
                           name
-                          inStock
-                          gallery
-                          description
-                          category
-                          attributes {
+                          type
+                          items {
+                            displayValue
+                            value
                             id
-                            name
-                            type
-                            items {
-                              displayValue
-                              value
-                              id
-                            }
                           }
-                          prices {
-                            currency {
-                              symbol
-                              label
-                            }
-                            amount
-                          }
-                          brand
                         }
+                        prices {
+                          currency {
+                            symbol
+                            label
+                          }
+                          amount
+                        }
+                        brand
                     }
                 }`,
-            variables: CategoryInput
+            variables: String
         }),
         })
         .then(res => res.json())
         .then(json => {
-                        dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data.category.products})
+                        console.log(json)
+                        dispatch({type: GET_PRODUCTS_BY_CATEGORY, payload: json.data.getCategory})
                       })
     } 
 }
