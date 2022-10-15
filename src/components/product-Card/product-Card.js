@@ -80,15 +80,15 @@ class ProductCard extends Component {
             <div className='wraperProductCard'>
                     {this.props.paginationData.map(product => {return (
                         <div    className="productCardMain" 
-                                key={product.id} 
-                                onMouseEnter={(e)=>showCartButton(e, product.id)} 
-                                onMouseLeave={(e)=>hideCartButton(e, product.id)}
+                                key={product.setId} 
+                                onMouseEnter={(e)=>showCartButton(e, product.setId)} 
+                                onMouseLeave={(e)=>hideCartButton(e, product.setId)}
                         >
                             <NavLink 
-                                onClick={()=> this.onClickNavigation(product.id)} 
-                                to={`/productdetails/${product.id}`} 
+                                onClick={()=> this.onClickNavigation(product.setId)} 
+                                to={`/productdetails/${product.setId}`} 
                                 className="navlink" 
-                                key={product.id}
+                                key={product.setId}
                             >
                                 <div className={product.inStock ? 'productCardContainer' : 'outOfStock'}>
                                     <div className='imageContainer'>
@@ -108,7 +108,7 @@ class ProductCard extends Component {
                                 </div>
                             </NavLink>
 
-                            <div className={this.state.entering && this.state.productId === product.id ? 'circleIcon' : ''}>
+                            <div className={this.state.entering && this.state.productId === product.setId ? 'circleIcon' : ''}>
                                 {product.inStock
                                 ?
                                     <button className='surface' id="cartButton" onClick={()=>this.onClickCartButton(product)}>

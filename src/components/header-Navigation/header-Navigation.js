@@ -31,14 +31,14 @@ export class HeaderNavigation extends Component {
         this.props.getAllCategories();
         this.props.getProductsByCategory(
             JSON.parse(sessionStorage.getItem('postedCurrentCategory'))?.currentCategory
-            || this.state.categorySelected
+            || "all" //this.state.categorySelected
             );
         if (!this.state.categorySelected
             && !JSON.parse(sessionStorage.getItem('postedCurrentCategory'))
             ) this.props.postCurrentCategory('all')
     }
 
-    componentDidUpdate(_prevProps,prevState) {
+    componentDidUpdate(_prevProps,prevState) { 
         if (this.state.buttonSelected !== prevState.buttonSelected) {
             this.props.getProductsByCategory(this.state.categorySelected);
             this.props.postCurrentCategory(this.state.categorySelected);

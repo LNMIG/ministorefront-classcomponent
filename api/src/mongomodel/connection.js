@@ -11,7 +11,7 @@ export async function connectMongoose () {
         await mongoose.connect(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
     }
     catch (err) {
-        console.log('Error en mongoose')
+        console.log('Error on mongoose')
     }
 }
 

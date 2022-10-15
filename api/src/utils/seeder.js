@@ -25,8 +25,9 @@ mongoose.connect(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
 const db = mongoose.createConnection(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
 
 //Create Collections
-//db.createCollection(DB_COLLECTION1, (err, result) => {})
-//db.createCollection(DB_COLLECTION2, (err, result) => {})
+// db.createCollection(DB_COLLECTION1, (err, result) => {})
+// db.createCollection(DB_COLLECTION2, (err, result) => {})
+// db.createCollection(DB_COLLECTION3, (err, result) => {})
 //Clean Collections
 db.collection(DB_COLLECTION1).drop()
 db.collection(DB_COLLECTION2).drop()

@@ -96,7 +96,6 @@ class Pagination extends Component {
     }
 
     render () {
-
         return (
             <div className="pagination_wrapper">
                 <button

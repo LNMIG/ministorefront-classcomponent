@@ -42,7 +42,7 @@ const loadData = (data) => {
     }),
     })
     .then(res => res.json())
-    .then(json => console.log('Estoy en LOADDATA: ',json.data))
+    .then(json => console.log('Loading Data: ',json.data))
 }
 
 export default loadData

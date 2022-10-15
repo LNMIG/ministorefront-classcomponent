@@ -55,13 +55,13 @@ class ProductDetail extends Component {
                 this.props.getProductById(this.props.match.params.id)
                 this.props.postSelectedCurrency(JSON.parse(sessionStorage.getItem('currentCurrency')))
             } else {
-                this.props.getProductById(JSON.parse(sessionStorage.getItem('productDetails')).id)
+                this.props.getProductById(JSON.parse(sessionStorage.getItem('productDetails')).setId)
                 this.props.postSelectedCurrency(JSON.parse(sessionStorage.getItem('currentCurrency')))
             }
         }
     }
     componentDidUpdate (prevProps, _prevState) {
-        if(this.props.productDetails.id !== prevProps.productDetails.id) {
+        if(this.props.productDetails.setId !== prevProps.productDetails.setId) {
             let attributeStateLoad = []
 
             for (let i=0; i<this.props.productDetails.attributes.length; i++) {
@@ -78,7 +78,7 @@ class ProductDetail extends Component {
     // }
 
     render () {
-
+        
         if (Object.entries(this.props.productDetails).length === 0 && !JSON.parse(sessionStorage.getItem('productDetails'))) {
             return (
                 <div className='productCardLoading'>

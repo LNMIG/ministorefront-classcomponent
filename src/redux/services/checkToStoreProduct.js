@@ -3,12 +3,12 @@ const checkToStoreProduct = (pastSelection, currentSelection) => {
     if (pastSelection.length === 0) return [currentSelection]
     
     for (let i=0; i<pastSelection.length; i++) {
-        if (pastSelection[i].id === currentSelection.id && pastSelection[i].attByDefault.length === 0) {
+        if (pastSelection[i].setId === currentSelection.setId && pastSelection[i].attByDefault.length === 0) {
             pastSelection[i].quantity = pastSelection[i].quantity + currentSelection.quantity
             return pastSelection
         }
 
-        if (pastSelection[i].id === currentSelection.id){
+        if (pastSelection[i].setId === currentSelection.setId){
             let even = 0;
             for (let j=0; j<pastSelection[i].attByDefault.length; j++) {
 
