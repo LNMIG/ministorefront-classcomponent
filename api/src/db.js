@@ -5,7 +5,11 @@ dotenv.config()
 const { DB_USER, DB_HOST, DB_PORT, DB_NAME } = process.env
 
 let connection
-const mongoURL = `${DB_USER}://${DB_HOST}:${DB_PORT}/${DB_NAME}`
+const mongoURL = `${DB_USER}://${DB_HOST}:${DB_PORT}/${DB_NAME}` || process.env.MONGODB_URI 
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}
 
 async function connectDB () {
     if(connection) return connection //don't need to define it again if it exists
@@ -15,7 +19,7 @@ async function connectDB () {
             let dbConnection
             let client
             //a new MongoClient is created
-            client = new MongoClient(mongoURL, {useNewUrlParser: true, useUnifiedTopology: true})
+            client = new MongoClient(mongoURL, options)
             //connect client to server
             await client.connect()
             //connect to date base
